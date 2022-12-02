@@ -10,7 +10,7 @@
         <h2>Informations complémentaires</h2>
 
         <h3>Formateur référent </h3>
-        <p>{{ session.formateur }}</p>
+        <p><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></p>
 
         <h3>durée : </h3>
         <p>{{ session.dateDebut|date("d/m/Y") ~' au '~ session.dateFin|date("d/m/Y")  }}</p>

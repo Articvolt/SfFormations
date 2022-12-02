@@ -23,8 +23,8 @@
                     <tbody>
                         {% for session in pastSessions %}
                             <tr>
-                                <td>{{ session.intitule }}</td>
-                                <td>{{ session.formateur }}</td>
+                                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                                <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
                                 <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
                                 <td>{{ session.placeTotal }}</td>
                             </tr> 
@@ -50,8 +50,8 @@
                     <tbody>
                         {% for session in nowSessions %}
                             <tr>
-                                <td>{{ session.intitule }}</td>
-                                <td>{{ session.formateur }}</td>
+                                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                                <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
                                 <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
                                 <td>{{ session.placeTotal }}</td>
                             </tr> 
@@ -77,8 +77,8 @@
                     <tbody>
                         {% for session in postSessions %}
                             <tr>
-                                <td>{{ session.intitule }}</td>
-                                <td>{{ session.formateur }}</td>
+                                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                                <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
                                 <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
                                 <td>{{ session.placeTotal }}</td>
                             </tr> 
