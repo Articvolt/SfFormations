@@ -31,7 +31,7 @@ class SessionController extends AbstractController
 // FONCTION D'AJOUT ET D'EDITION DE STAGIAIRE
     public function add(ManagerRegistry $doctrine, SessionFormation $session = null, Request $request): Response {
 
-        $form = $this->createForm(SessionFormationType::class, $session);
+        $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {

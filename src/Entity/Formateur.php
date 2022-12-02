@@ -131,4 +131,14 @@ class Formateur
 
         return $this;
     }
+
+    public function getIdentite()
+    {
+        return $this->prenom." ".$this->nom;
+    }
+    
+    public function __toString()
+    {
+        return $this->prenom." ".$this->nom;   
+    }
 }

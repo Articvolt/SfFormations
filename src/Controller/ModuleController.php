@@ -49,7 +49,7 @@ public function add(ManagerRegistry $doctrine, Module $module = null, Request $r
         //execute
         $entityManager->flush();
         // récupère l'id de la catégorie du module visé
-        $idCat = $module->getCategories()->getId();
+        $idCat = $module->getCategorie()->getId();
         
         return $this->redirectToRoute('show_categorie', ["id" => $idCat]);
     }
@@ -68,19 +68,13 @@ public function add(ManagerRegistry $doctrine, Module $module = null, Request $r
     /**
      * @Route("module/{id}/delete", name="delete_module")
      */
-    public function delete(ManagerRegistry $doctrine, ProgrammerRepository $pr, Module $module) {
+    public function delete(ManagerRegistry $doctrine, Module $module) {
 
         $entityManager = $doctrine->getManager();
 
-
-        $programmes = $pr->findBy(["modules" => $module]);
         // dd($programmes);
+        
         $idCat = $module->getCategorie()->getId();
-
-        foreach($programmes as $p){
-            $entityManager->remove($p);
-        }
-
         // enleve de la collection de la base de données
         $entityManager->remove($module);
         $entityManager->flush();
