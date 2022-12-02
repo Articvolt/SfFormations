@@ -36,7 +36,7 @@
                 <tbody>
                     {% for session in formateur.sessions %}
                         <tr>
-                            <td>{{ session.intitule }}</td>
+                            <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
                             <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
                         </tr> 
                     {% endfor %}
