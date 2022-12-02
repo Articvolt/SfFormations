@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de {{stagiaire.prenom ~' '~ stagiaire.nom}}{% endblock %}
+
+{% block body %}
+
+    <h1>{{stagiaire.prenom ~' '~ stagiaire.nom}}</h1>
+
+    <section>
+        <h2>Coordonnées</h2>
+
+        <h3>numéro de téléphone : </h3>
+        <p>{{ stagiaire.phone }}</p>
+
+        <h3>mail : </h3>
+        <p>{{ stagiaire.email }}</p>
+
+        <h3>adresse : </h3>
+        <p>{{ stagiaire.adresse ~' '~ stagiaire.cp ~' '~ stagiaire.city }}</p>
+
+    </section>
+
+    
+    <section>
+        <h2>Sessions inscrites</h2>
+        
+        {% if stagiaire.sessions | length == 0 %}
+            
+        <p>N'est inscrit à aucune session</p>
+    
+        {% else %}
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th>INTITULE</th>
+                        <th>REFERENT</th>
+                        <th>DATES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for session in stagiaire.sessions %}
+                        <tr>
+                            <td>{{ session.intitule }}</td>
+                            <td>{{ session.formateur }}</td>
+                            <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+        {% endif %}
+    </section>
+
+
+{% endblock %}

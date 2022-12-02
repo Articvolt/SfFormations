@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MODULES{% endblock %}
+
+{% block body %}
+    <h1>Liste des modules dans {{ categorie.nomCategorie }}</h1>
+
+    <p><button class="addButton"><a href=" {{ path('add_module') }} ">Ajouter un module</a></button></p>
+
+
+    {% if categorie.modules | length == 0 %}
+        
+    <p>Il n'y a pas de modules dans cette catégorie</p>
+
+    {% else %}
+        {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+        {# sessions -> éléments du controller qu'on récupère #}
+        <table>
+            <thead>
+                <tr>
+                    <th>MODULE</th>
+                    <th>OPTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for module in categorie.modules %}
+                    <tr>
+                        <td>{{ module.nomModule }}</td>
+                        <td>
+                            <a href="{{ path('edit_module', {'id': module.id , 'idCategorie': categorie.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> 
+                            <a href="{{ path('delete_module', {'id': module.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    {% endif %}
+        
+{% endblock %}

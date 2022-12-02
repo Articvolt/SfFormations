@@ -44,6 +44,21 @@ class Stagiaire
      */
     private $sessions;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $cp;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $adresse;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
@@ -122,6 +137,42 @@ class Stagiaire
     public function removeSession(SessionFormation $session): self
     {
         $this->sessions->removeElement($session);
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCp(): ?string
+    {
+        return $this->cp;
+    }
+
+    public function setCp(string $cp): self
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }

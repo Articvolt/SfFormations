@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+    margin: 0;  
+}
+
+/*------------------------------- NAVBAR ------------------------------------ */
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem;  
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: brown;
+}
+
+/* ---------------------------------------------------- */
+h1 {
+    color: brown;
+    text-align: center;
+    margin: 2rem;
+}
+
+section h2 {
+    text-align: center;
+    margin: 2rem;
+}
+
+article {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* TABLE */
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table td, table th {
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+table td {
+    text-align: center;  
+}
+
+table tr td a {
+    text-decoration: none;
+    color: brown;
+}
+
+/* -------------------- BOUTON ADD ------------------------ */
+
+p .addButton a {
+    text-decoration: none;
+}
+
+p .addButton a:active {
+    text-decoration: none;
+}
+
+p .addButton a:hover {
+    text-decoration: none;
+}

@@ -1,20 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StagiaireController!{% endblock %}
+{% block title %}STAGIAIRE{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Liste des stagiaires enregistrés</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <p><button class="addButton"><a href=" {{ path('add_stagiaire') }} ">Ajouter un stagiaire</a></button></p>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/exercices/SfFormations/src/Controller/StagiaireController.php'|file_link(0) }}">src/Controller/StagiaireController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/exercices/SfFormations/templates/stagiaire/index.html.twig'|file_link(0) }}">templates/stagiaire/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+    {# stagiaires -> éléments du controller qu'on récupère #}
+    <table>
+        <thead>
+            <tr>
+                <th>STAGIAIRE</th> 
+                <th>OPTIONS</th>    
+            </tr>
+        </thead>
+        <tbody>
+            {% for stagiaire in stagiaires %}
+                <tr>
+                    {# creation d'un lien avec récupèration de l'ID de l'objet #}
+                    <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{ stagiaire.prenom ~' '~ stagiaire.nom }}</a></td>
+                    <td>
+                        <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> 
+                        <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr> 
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -63,4 +63,45 @@ class SessionFormationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+// FONCTION QUI RECUPERE LES SESSIONS AUX DATES ANTERIEURES
+    public function showSessionPast() {
+
+        //date actuelle
+        $now = new \DateTime();
+        return $this->createQueryBuilder('s')
+                    ->andWhere('s.dateFin < :val')
+                    ->setParameter('val' , $now)
+                    ->orderBy('s.dateDebut', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+// FONCTION QUI RECUPERE LES SESSIONS AUX DATES ACTUELLES
+    public function showSessionNow() {
+
+        //date actuelle
+        $now = new \DateTime();
+        return $this->createQueryBuilder('s')
+                    ->andWhere('s.dateDebut <= :val ' , ':val < s.dateFin ')
+                    ->setParameter('val' , $now)
+                    ->orderBy('s.dateDebut', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+// FONCTION QUI RECUPERE LES SESSIONS AUX DATES POSTERIEURES
+    public function showSessionPost() {
+
+        //date actuelle
+        $now = new \DateTime();
+        return $this->createQueryBuilder('s')
+                    // quand la date de debut est au dessus de la date actuelle
+                    ->andWhere('s.dateDebut > :val')
+                    //execute
+                    ->setParameter('val' , $now)
+                    ->orderBy('s.dateDebut', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

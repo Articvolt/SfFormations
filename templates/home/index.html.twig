@@ -1,20 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}ACCUEIL{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>THE FORMATION</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/exercices/SfFormations/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/exercices/SfFormations/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <article>
+            <section>
+                <h2>SESSIONS PASSEES</h2>
+            
+                {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+                {# sessions -> éléments du controller qu'on récupère #}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>INTITULE</th>
+                            <th>REFERENT</th>
+                            <th>DATES</th>
+                            <th>NOMBRE DE PLACES</th>       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for session in pastSessions %}
+                            <tr>
+                                <td>{{ session.intitule }}</td>
+                                <td>{{ session.formateur }}</td>
+                                <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                                <td>{{ session.placeTotal }}</td>
+                            </tr> 
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        
+            <section>
+                <h2>SESSIONS ACTUELLES</h2>
+            
+                {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+                {# sessions -> éléments du controller qu'on récupère #}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>INTITULE</th>
+                            <th>REFERENT</th>
+                            <th>DATES</th>
+                            <th>NOMBRE DE PLACES</th>       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for session in nowSessions %}
+                            <tr>
+                                <td>{{ session.intitule }}</td>
+                                <td>{{ session.formateur }}</td>
+                                <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                                <td>{{ session.placeTotal }}</td>
+                            </tr> 
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        
+            <section>
+                <h2>SESSIONS FUTURES</h2>
+            
+                {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+                {# sessions -> éléments du controller qu'on récupère #}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>INTITULE</th>
+                            <th>REFERENT</th>
+                            <th>DATES</th>
+                            <th>NOMBRE DE PLACES</th>       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for session in postSessions %}
+                            <tr>
+                                <td>{{ session.intitule }}</td>
+                                <td>{{ session.formateur }}</td>
+                                <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                                <td>{{ session.placeTotal }}</td>
+                            </tr> 
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </article>
 {% endblock %}
