@@ -25,7 +25,8 @@ class SessionController extends AbstractController
         ]);
     }
 
-    // FONCTION D'AJOUT ET D'EDITION DE SESSION
+
+// FONCTION D'AJOUT ET D'EDITION DE SESSION ------------------------------------------
     /**
      * @Route("/session/add", name="add_session")
      * @Route("/session/{id}/edit", name="edit_session")
@@ -60,7 +61,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-// SUPPRESSION STAGIAIRE
+// SUPPRESSION STAGIAIRE---------------------------------------------------------
     /**
      * @Route("session/{id}/delete", name="delete_session")
      */
@@ -74,7 +75,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
-    // FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID
+// FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID ----------------------------
     /**
      * @Route("/session/{id}", name="show_session")
      */

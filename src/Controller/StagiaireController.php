@@ -24,11 +24,12 @@ class StagiaireController extends AbstractController
         ]);
     }
 
+
+// FONCTION D'AJOUT ET D'EDITION DE STAGIAIRE ------------------------------------
     /**
      * @Route("/stagiaire/add", name="add_stagiaire")
      * @Route("/stagiaire/{id}/edit", name="edit_stagiaire")
      */
-// FONCTION D'AJOUT ET D'EDITION DE STAGIAIRE
     public function add(ManagerRegistry $doctrine, Stagiaire $stagiaire = null, Request $request): Response {
 
         if(!$stagiaire) {
@@ -61,7 +62,8 @@ class StagiaireController extends AbstractController
         ]);
     }
 
-    // SUPPRESSION STAGIAIRE
+
+// SUPPRESSION STAGIAIRE ----------------------------------------------------
     /**
      * @Route("stagiaire/{id}/delete", name="delete_stagiaire")
      */
@@ -75,12 +77,13 @@ class StagiaireController extends AbstractController
         return $this->redirectToRoute('app_stagiaire');
     }
 
+
+// FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID----------------------------
     /**
      * @Route("/stagiaire/{id}", name="show_stagiaire")
      */
     public function show(Stagiaire $stagiaire): Response
     {
-// FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID
         return $this->render('stagiaire/show.html.twig', [
             'stagiaire' => $stagiaire
         ]);

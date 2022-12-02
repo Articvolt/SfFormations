@@ -25,18 +25,19 @@ class CategorieController extends AbstractController
         ]);
     }
 
+
+    // FONCTION D'AJOUT ET D'EDITION DE CATEGORIE -----------------------------------
     /**
      * @Route("/categorie/add", name="add_categorie")
      * @Route("/categorie/{id}/edit", name="edit_categorie")
      */
-// FONCTION D'AJOUT ET D'EDITION DE categorie
     public function add(ManagerRegistry $doctrine, Categorie $categorie = null, Request $request): Response {
 
         if(!$categorie) {
             $categorie = new categorie();
         }
 
-
+        //création du formulaire avec pour argument la classe du formulaire et une variable
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
 
@@ -52,17 +53,17 @@ class CategorieController extends AbstractController
             return $this->redirectToRoute('app_categorie');
         }
 
-
-        //vue pour afficher le formulaire
+        //retourne la vue pour afficher le formulaire
         return $this->render('categorie/add.html.twig', [
-            //génère le formulaire visuellement
+            //génère la vue du formulaire
             'formAddCategorie' =>$form->createView(),
-            //recupere pour l'edit
+            //recupere l'id pour l'edition
             'edit' => $categorie->getId()
         ]);
     }
 
-// SUPPRESSION categorie
+
+// SUPPRESSION CATEGORIE--------------------------------------------------------
     /**
      * @Route("categorie/{id}/delete", name="delete_categorie")
      */
@@ -78,7 +79,8 @@ class CategorieController extends AbstractController
         return $this->redirectToRoute('app_categorie');
     }
 
-// AFFICHER UNE CATEGORIE
+
+// AFFICHER UNE CATEGORIE--------------------------------------------------------
     /**
      * @Route("/categorie/{id}", name="show_categorie")
      */

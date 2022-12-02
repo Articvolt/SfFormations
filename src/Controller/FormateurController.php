@@ -28,13 +28,12 @@ class FormateurController extends AbstractController
      * @Route("/formateur/add", name="add_formateur")
      * @Route("/formateur/{id}/edit", name="edit_formateur")
      */
-// FONCTION D'AJOUT ET D'EDITION DE FORMATEUR
+// FONCTION D'AJOUT ET D'EDITION DE FORMATEUR-----------------------------------
     public function add(ManagerRegistry $doctrine, Formateur $formateur = null, Request $request): Response {
 
         if(!$formateur) {
             $formateur = new Formateur();
         }
-
 
         $form = $this->createForm(FormateurType::class, $formateur);
         $form->handleRequest($request);
@@ -61,7 +60,7 @@ class FormateurController extends AbstractController
         ]);
     }
 
-     // SUPPRESSION FORMATEUR
+// SUPPRESSION FORMATEUR -------------------------------------------------------
     /**
      * @Route("formateur/{id}/delete", name="delete_formateur")
      */
