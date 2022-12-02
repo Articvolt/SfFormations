@@ -25,11 +25,16 @@ class SessionController extends AbstractController
         ]);
     }
 
+    // FONCTION D'AJOUT ET D'EDITION DE SESSION
     /**
      * @Route("/session/add", name="add_session")
+     * @Route("/session/{id}/edit", name="edit_session")
      */
-// FONCTION D'AJOUT ET D'EDITION DE STAGIAIRE
     public function add(ManagerRegistry $doctrine, SessionFormation $session = null, Request $request): Response {
+
+        if(!$session) {
+            $session = new Session();
+        }
 
         $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
@@ -49,16 +54,32 @@ class SessionController extends AbstractController
          //vue pour afficher le formulaire
          return $this->render('session/add.html.twig', [
             //génère le formulaire visuellement
-            'formAddSession' =>$form->createView()
+            'formAddSession' =>$form->createView(),
+            //recupere pour l'edit
+            'edit' => $session->getId()
         ]);
     }
 
-        /**
+// SUPPRESSION STAGIAIRE
+    /**
+     * @Route("session/{id}/delete", name="delete_session")
+     */
+    public function delete(ManagerRegistry $doctrine, SessionFormation $session) {
+
+        $entityManager = $doctrine->getManager();
+        // enleve de la collection de la base de données
+        $entityManager->remove($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_session');
+    }
+
+    // FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID
+    /**
      * @Route("/session/{id}", name="show_session")
      */
     public function show(SessionFormation $session): Response
     {
-// FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID
         return $this->render('session/show.html.twig', [
             'session' => $session
         ]);
