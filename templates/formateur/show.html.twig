@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de {{formateur.prenom ~' '~ formateur.nom}}{% endblock %}
+
+{% block body %}
+
+    <h1>{{formateur.prenom ~' '~ formateur.nom}}</h1>
+
+    <section>
+        <h2>Coordonnées</h2>
+
+        <h3>numéro de téléphone : </h3>
+        <p>{{ formateur.phone }}</p>
+
+        <h3>mail : </h3>
+        <p>{{ formateur.email }}</p>
+    </section>
+
+    
+    <section>
+        <h2>Sessions gérées</h2>
+        
+        {% if formateur.sessions | length == 0 %}
+            
+        <p>Ne gère aucune sessions</p>
+    
+        {% else %}
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th>INTITULE</th>
+                        <th>DATES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for session in formateur.sessions %}
+                        <tr>
+                            <td>{{ session.intitule }}</td>
+                            <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+        {% endif %}
+    </section>
+
+
+{% endblock %}

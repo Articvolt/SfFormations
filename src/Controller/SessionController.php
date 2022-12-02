@@ -8,7 +8,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
@@ -34,7 +33,7 @@ class SessionController extends AbstractController
     public function add(ManagerRegistry $doctrine, SessionFormation $session = null, Request $request): Response {
 
         if(!$session) {
-            $session = new Session();
+            $session = new SessionFormation();
         }
 
         $form = $this->createForm(SessionType::class, $session);

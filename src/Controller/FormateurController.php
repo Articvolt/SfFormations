@@ -74,4 +74,16 @@ class FormateurController extends AbstractController
         return $this->redirectToRoute('app_formateur');
     }
 
+
+// FONCTION QUI RECUPERE LE FORMATEUR DE LA BDD PAR SON ID----------------------------
+    /**
+     * @Route("/formateur/{id}", name="show_formateur")
+     */
+    public function show(Formateur $formateur): Response
+    {
+        return $this->render('formateur/show.html.twig', [
+            'formateur' => $formateur
+        ]);
+    }
+
 }
