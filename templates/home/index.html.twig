@@ -9,82 +9,101 @@
             <section>
                 <h2>SESSIONS PASSEES</h2>
             
-                {# utilisation d'un for pour afficher un tableau qu'on récupère #}
-                {# sessions -> éléments du controller qu'on récupère #}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>INTITULE</th>
-                            <th>REFERENT</th>
-                            <th>DATES</th>
-                            <th>NOMBRE DE PLACES</th>       
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for session in pastSessions %}
+                {% if pastSessions | length == 0 %}
+                   
+                <p>Pas de sessions terminées</p>
+
+                {% else %}
+                    {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+                    {# sessions -> éléments du controller qu'on récupère #}
+                    <table>
+                        <thead>
                             <tr>
-                                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
-                                <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
-                                <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
-                                <td>{{ session.placeTotal }}</td>
-                            </tr> 
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                <th>INTITULE</th>
+                                <th>REFERENT</th>
+                                <th>DATES</th>
+                                <th>NOMBRE DE PLACES</th>       
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for session in pastSessions %}
+                                <tr>
+                                    <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                                    <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
+                                    <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                                    <td>{{ session.placeTotal }}</td>
+                                </tr> 
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
             </section>
         
             <section>
                 <h2>SESSIONS ACTUELLES</h2>
-            
-                {# utilisation d'un for pour afficher un tableau qu'on récupère #}
-                {# sessions -> éléments du controller qu'on récupère #}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>INTITULE</th>
-                            <th>REFERENT</th>
-                            <th>DATES</th>
-                            <th>NOMBRE DE PLACES</th>       
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for session in nowSessions %}
+
+                {% if nowSessions | length == 0 %}
+                    
+                    <p>Il n'y a pas de sessions en cours</p>
+
+                {% else %}
+                    {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+                    {# sessions -> éléments du controller qu'on récupère #}
+                    <table>
+                        <thead>
                             <tr>
-                                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
-                                <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
-                                <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
-                                <td>{{ session.placeTotal }}</td>
-                            </tr> 
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                <th>INTITULE</th>
+                                <th>REFERENT</th>
+                                <th>DATES</th>
+                                <th>NOMBRE DE PLACES</th>       
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for session in nowSessions %}
+                                <tr>
+                                    <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                                    <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
+                                    <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                                    <td>{{ session.placeTotal }}</td>
+                                </tr> 
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
             </section>
         
             <section>
                 <h2>SESSIONS FUTURES</h2>
             
-                {# utilisation d'un for pour afficher un tableau qu'on récupère #}
-                {# sessions -> éléments du controller qu'on récupère #}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>INTITULE</th>
-                            <th>REFERENT</th>
-                            <th>DATES</th>
-                            <th>NOMBRE DE PLACES</th>       
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for session in postSessions %}
+                {% if postSessions | length == 0 %}
+                    
+                <p>Il n'y a pas de sessions prochaines</p>
+
+                {% else %}
+                    {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+                    {# sessions -> éléments du controller qu'on récupère #}
+                    <table>
+                        <thead>
                             <tr>
-                                <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
-                                <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
-                                <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
-                                <td>{{ session.placeTotal }}</td>
-                            </tr> 
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                <th>INTITULE</th>
+                                <th>REFERENT</th>
+                                <th>DATES</th>
+                                <th>NOMBRE DE PLACES</th>       
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for session in postSessions %}
+                                <tr>
+                                    <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                                    <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
+                                    <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                                    <td>{{ session.placeTotal }}</td>
+                                </tr> 
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
             </section>
         </article>
 {% endblock %}
