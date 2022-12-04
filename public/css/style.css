@@ -1,13 +1,18 @@
 * {
     box-sizing: border-box;
     margin: 0;  
-}
+    font-family: apercu, sans-serif;;
+    }
+
+body {
+    background-color:#534B52;
+} 
+
 
 /*------------------------------- NAVBAR ------------------------------------ */
 
 nav {
-    padding: 2rem;
-    background-color: black;
+    padding: 1rem;
 }
 
 nav ul {
@@ -19,26 +24,38 @@ nav ul {
 
 nav ul li {
     list-style: none;
+    transition: 0.4s;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: white;
-    transition: 1s;
+    text-transform: uppercase;
+    text-decoration: underline 0.15em rgb(34,34,34,0);
+    transition: text-decoration-color 500ms;
+    color:rgb(34,34,34);
+    font-weight:900;
+    font-size: 20px;
 }
 
 nav ul li a:hover {
-    transition: 1s;
-    transform: translateY(-10px);
+    text-decoration-color: #E0DDCF;
 }
-
 
 
 /* ---------------------------------------------------- */
 h1 {
-    color: brown;
+    color: #E0DDCF ;
     text-align: center;
+    font-weight: 1000;
+    font-size: 40px;
+    text-transform: capitalize;
+    text-decoration: underline 0.15em rgba(255, 255, 255, 0);
+    transition: text-decoration-color 500ms;
     margin: 2rem;
+}
+
+h1:hover {
+    text-decoration-color: #E0DDCF;
 }
 
 section h2 {
@@ -56,15 +73,23 @@ article {
 table {
     border-collapse: collapse;
     margin: auto;
+    border-radius: 5px;
+}
+
+table th {
+    color:rgb(34,34,34);
+    background-color: #474448;
 }
 
 table td, table th {
-    border: 1px solid black;
-    padding: 1rem;
+    border: 1px solid rgb(34,34,34);
+    padding: 0.5rem;
+    
 }
 
 table td {
-    text-align: center;  
+    text-align: center; 
+    background-color: #F1F0EA;
 }
 
 table tr td a {
@@ -74,14 +99,22 @@ table tr td a {
 
 /* -------------------- BOUTON ADD ------------------------ */
 
-p .addButton a {
-    text-decoration: none;
+p .addButton {
+    border: 1px solid grey;
+    margin:  0 1rem;
+    padding: 0.5rem ;
+    border-radius: 5px;
+    background-color: #F1F0EA;
 }
 
-p .addButton a:active {
+p .addButton a {
     text-decoration: none;
+    
+    border: none;
+    color: rgba(109, 3, 3, 0.644);
 }
 
 p .addButton a:hover {
     text-decoration: none;
+    color: brown;
 }
