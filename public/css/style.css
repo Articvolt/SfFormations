@@ -70,6 +70,11 @@ section h2 {
     cursor: default;
 }
 
+h3 {
+    color:rgb(34,34,34);
+    margin: 5px;
+}
+
 section h2:hover {
     text-decoration-color: #E0DDCF;
 
@@ -91,6 +96,7 @@ table {
 table th {
     color:rgb(34,34,34);
     background-color: #474448;
+    cursor: default;
 }
 
 table td, table th {
@@ -139,4 +145,13 @@ p .addButton a:hover {
 .fa-triangle-exclamation {
     color: #EA3546;
     font-size: 30px;
+}
+
+.linkAnchor {
+    color: #E0DDCF;
+    text-decoration: none;
+}
+
+.sectionDescription {
+    text-align: center;
 }
