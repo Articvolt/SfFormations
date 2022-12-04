@@ -52,6 +52,7 @@ h1 {
     text-decoration: underline 0.15em rgba(255, 255, 255, 0);
     transition: text-decoration-color 500ms;
     margin: 2rem;
+    cursor: default;
 }
 
 h1:hover {
@@ -60,12 +61,22 @@ h1:hover {
 
 section h2 {
     text-align: center;
+    font-weight: 900;
+    font-size: 26px;
     margin: 2rem;
+    color:rgb(34,34,34);
+    text-decoration: underline 0.15em rgba(255, 255, 255, 0);
+    transition: text-decoration-color 500ms;
+    cursor: default;
+}
+
+section h2:hover {
+    text-decoration-color: #E0DDCF;
+
 }
 
 article {
-    display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 /* TABLE */
@@ -73,7 +84,8 @@ article {
 table {
     border-collapse: collapse;
     margin: auto;
-    border-radius: 5px;
+    border-radius: 1em;
+    overflow: hidden;
 }
 
 table th {
@@ -82,8 +94,7 @@ table th {
 }
 
 table td, table th {
-    border: 1px solid rgb(34,34,34);
-    padding: 0.5rem;
+    padding: 1rem;
     
 }
 
@@ -117,4 +128,15 @@ p .addButton a {
 p .addButton a:hover {
     text-decoration: none;
     color: brown;
+}
+
+/* -------------------- BOUTON WARNING + texte ------------------------ */
+
+.noEntry {
+    text-align: center;
+}
+
+.fa-triangle-exclamation {
+    color: #EA3546;
+    font-size: 30px;
 }

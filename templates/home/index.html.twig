@@ -11,7 +11,7 @@
             
                 {% if pastSessions | length == 0 %}
                    
-                <p>Pas de sessions terminées</p>
+                <p class="noEntry">Pas de sessions terminées</p>
 
                 {% else %}
                     {# utilisation d'un for pour afficher un tableau qu'on récupère #}
@@ -44,7 +44,7 @@
 
                 {% if nowSessions | length == 0 %}
                     
-                    <p>Il n'y a pas de sessions en cours</p>
+                    <p class="noEntry">Il n'y a pas de sessions en cours</p>
 
                 {% else %}
                     {# utilisation d'un for pour afficher un tableau qu'on récupère #}
@@ -77,7 +77,7 @@
             
                 {% if postSessions | length == 0 %}
                     
-                <p>Il n'y a pas de sessions prochaines</p>
+                <p class="noEntry">Il n'y a pas de sessions prochaines</p>
 
                 {% else %}
                     {# utilisation d'un for pour afficher un tableau qu'on récupère #}
