@@ -5,10 +5,16 @@
 
 /*------------------------------- NAVBAR ------------------------------------ */
 
+nav {
+    padding: 2rem;
+    background-color: black;
+}
+
 nav ul {
     display: flex;
     justify-content: space-around;
-    margin: 2rem;  
+    margin: 2rem;
+    
 }
 
 nav ul li {
@@ -17,8 +23,16 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: brown;
+    color: white;
+    transition: 1s;
 }
+
+nav ul li a:hover {
+    transition: 1s;
+    transform: translateY(-10px);
+}
+
+
 
 /* ---------------------------------------------------- */
 h1 {
