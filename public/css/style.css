@@ -155,3 +155,13 @@ p .addButton a:hover {
 .sectionDescription {
     text-align: center;
 }
+
+/* -------------------- FORMULAIRE ------------------------ */
+
+.form {
+    margin: 20px;
+}
+
+.form-button {
+    color: #EA3546;
+}
