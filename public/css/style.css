@@ -142,6 +142,10 @@ p .addButton a:hover {
     text-align: center;
 }
 
+.noEntryButton {
+    margin: 1rem;
+}
+
 .fa-triangle-exclamation {
     color: #EA3546;
     font-size: 30px;

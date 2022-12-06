@@ -17,6 +17,48 @@
     </section>
      
     <section>
+        <h2>Modules</h2>
+
+        {% if session.programmers | length == 0 %}
+            
+        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Il n'y a pas de modules dans cette session <i class="fa-solid fa-triangle-exclamation"></i></p>
+
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>MODULE</th>
+                        <th>DUREE</th>
+                        <th>OPTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+            {% for programme in session.programmers %}
+                  <tr>
+                    <td>{{programme.module.nomModule}}</td>
+                    <td>({{programme.duree}} heures)</td>
+                    <td>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                  </tr>             
+            {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        
+        <br>
+    
+        <p class="noEntry">
+            <button class="noEntryButton">
+                <a href="">Ajouter un module</a>
+            </button>
+        </p>
+
+       
+    </section>
+
+
+    <section>
         <h2>Stagiaires inscrits</h2>
 
         {% if session.stagiaires | length == 0 %}
