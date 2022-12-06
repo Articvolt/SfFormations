@@ -86,11 +86,38 @@
 
         {% endif %}
 
-        <p class="noEntry">
+        {# <p class="noEntry">
             <button class="noEntryButton">
                 <a href="">Ajouter un stagiaire</a>
             </button>
-        </p>
+        </p> #}
+
+        <h2>Stagiaires disponibles</h2>
+
+        {% if nonInscrits | length == 0 %}
+            
+        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire disponibles <i class="fa-solid fa-triangle-exclamation"></i></p>
+    
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>STAGIAIRE</th>
+                    <th>OPTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stagiaire in nonInscrits %}
+                    <tr>
+                        <td>{{stagiaire.prenom ~' '~ stagiaire.nom}}</td>
+                        <td><i class="fa-solid fa-trash"></i></td>
+
+                    </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endif %}
     </section>
 
 

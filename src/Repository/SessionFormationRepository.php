@@ -90,6 +90,7 @@ class SessionFormationRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    
 // FONCTION QUI RECUPERE LES SESSIONS AUX DATES POSTERIEURES
     public function showSessionPost() {
 
@@ -105,9 +106,10 @@ class SessionFormationRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+
 // FONCTION QUI AFFICHE LES STAGIAIRES NON INSCRITS 
 
-    public function findNonInscrit($session_id) {
+    public function findNonInscrits($session_id) {
         $em = $this->getEntityManager();
         $sub = $em->createQueryBuilder();
 
