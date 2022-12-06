@@ -90,7 +90,7 @@ class SessionFormationRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
-    
+
 // FONCTION QUI RECUPERE LES SESSIONS AUX DATES POSTERIEURES
     public function showSessionPost() {
 
@@ -111,22 +111,24 @@ class SessionFormationRepository extends ServiceEntityRepository
 
     public function findNonInscrits($session_id) {
         $em = $this->getEntityManager();
-        $sub = $em->createQueryBuilder();
+        $nonInscrit = $em->createQueryBuilder();
 
-        $qb = $sub;
-        $qb->select('s')
+        // Requête SQL
+        $sql = $nonInscrit;
+        $sql->select('s')
            ->from('App\Entity\Stagiaire','s')
            ->leftJoin('s.sessions', 'se')
            ->where('se.id = :id');
 
-        $sub = $em->createQueryBuilder();
-        $sub->select('st')
+        // Interaction avec l'entité Stagiaire
+        $nonInscrit = $em->createQueryBuilder();
+        $nonInscrit->select('st')
             ->from('App\Entity\Stagiaire', 'st')
-            ->where($sub->expr()->notIn('st.id', $qb->getDQL()))
+            ->where($nonInscrit->expr()->notIn('st.id', $sql->getDQL()))
             ->setParameter('id', $session_id)
             ->orderBy('st.nom');
 
-        $query = $sub->getQuery();
+        $query = $nonInscrit->getQuery();
         return $query->getResult();
 
     }

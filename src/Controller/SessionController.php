@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\SessionFormation;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
-use App\Repository\SessionFormationRepository;
+use App\Entity\SessionFormation;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\SessionFormationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class SessionController extends AbstractController
 {
@@ -75,8 +77,38 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
-//
+// FONCTION D'AJOUT DE STAGIAIRE
+    /**
+         * @Route("/session/formation/{idsess}/add/{idstag}", name="addStagiaire")
+         * @ParamConverter("session", options={"mapping" : {"idsess": "id"}})
+         * @ParamConverter("stagiaire", options={"mapping": {"idstag": "id"}})
+     */
+    public function addParticipant(ManagerRegistry $doctrine, SessionFormation $session, Stagiaire $stagiaire){
 
+        $em = $doctrine->getManager();
+        $session->addStagiaire($stagiaire);
+        $em->persist($session);
+        $em->flush();
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+
+    }
+
+// FONCTION DE SUPPRESSION DE STAGIAIRE 
+    /**
+        * @Route("/session/formation/{idsess}/remove/{idstag}", name="removeStagiaire")
+        * @ParamConverter("session", options={"mapping" : {"idsess": "id"}})
+        * @ParamConverter("stagiaire", options={"mapping": {"idstag": "id"}})
+     */
+
+    public function removeParticipant(ManagerRegistry $doctrine, SessionFormation $session, Stagiaire $stagiaire){
+
+        $em = $doctrine->getManager();
+        $session->removeStagiaire($stagiaire);
+        $em->persist($session);
+        $em->flush();
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+
+    }
 
 // FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID ----------------------------
     /**

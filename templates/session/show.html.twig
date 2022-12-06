@@ -66,57 +66,50 @@
         <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire d'inscrits <i class="fa-solid fa-triangle-exclamation"></i></p>
     
         {% else %}
-        <table>
-            <thead>
-                <tr>
-                    <th>STAGIAIRE</th>
-                    <th>OPTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for stagiaire in session.stagiaires %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{stagiaire.prenom ~' '~ stagiaire.nom}}</td>
-                        <td><i class="fa-solid fa-trash"></i></td>
+                        <th>STAGIAIRE</th>
+                        <th>OPTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stagiaire in session.stagiaires %}
+                        <tr>
+                            <td>{{stagiaire.prenom ~' '~ stagiaire.nom}}</td>
+                            <td><a href="{{path('removeStagiaire', {'idsess':session.id , 'idstag':stagiaire.id})}}">[désinscrire]</a></td>
 
-                    </tr> 
-                {% endfor %}
-            </tbody>
-        </table>
-
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+            </table>
         {% endif %}
 
-        {# <p class="noEntry">
-            <button class="noEntryButton">
-                <a href="">Ajouter un stagiaire</a>
-            </button>
-        </p> #}
 
         <h2>Stagiaires disponibles</h2>
 
         {% if nonInscrits | length == 0 %}
             
-        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire disponibles <i class="fa-solid fa-triangle-exclamation"></i></p>
+            <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire disponibles <i class="fa-solid fa-triangle-exclamation"></i></p>
     
         {% else %}
-        <table>
-            <thead>
-                <tr>
-                    <th>STAGIAIRE</th>
-                    <th>OPTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for stagiaire in nonInscrits %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{stagiaire.prenom ~' '~ stagiaire.nom}}</td>
-                        <td><i class="fa-solid fa-trash"></i></td>
+                        <th>STAGIAIRE</th>
+                        <th>OPTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stagiaire in nonInscrits %}
+                        <tr>
+                            <td>{{stagiaire.prenom ~' '~ stagiaire.nom}}</td>
+                            <td><a href="{{path('addStagiaire', {'idsess':session.id , 'idstag':stagiaire.id})}}">[inscrire]</a></td>
 
-                    </tr> 
-                {% endfor %}
-            </tbody>
-        </table>
-
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+            </table>
         {% endif %}
     </section>
 
