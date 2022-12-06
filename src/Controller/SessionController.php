@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\SessionFormation;
 use App\Form\SessionType;
+use App\Repository\SessionFormationRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,7 +61,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-// SUPPRESSION STAGIAIRE---------------------------------------------------------
+// SUPPRESSION SESSION ---------------------------------------------------------
     /**
      * @Route("session/{id}/delete", name="delete_session")
      */
@@ -74,14 +75,24 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
+//
+
+
 // FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID ----------------------------
     /**
-     * @Route("/session/{id}", name="show_session")
+     * @Route("/session/{id}", name="show_session", requirements={"id"="\d+"})
      */
-    public function show(SessionFormation $session): Response
+    public function show(SessionFormation $session, SessionFormationRepository $sr): Response
     {
+
+        $nonInscrits = $sr->findNonInscrits($session->getId());
+        $nonProgrammes = $sr->findNonProgrammes($session->getId());
+
+
         return $this->render('session/show.html.twig', [
-            'session' => $session
+            'session' => $session,
+            'nonInscrits' => $nonInscrits,
+            'nonProgrammes' => $nonProgrammes
         ]);
     }
 
