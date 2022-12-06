@@ -70,24 +70,27 @@
             <thead>
                 <tr>
                     <th>STAGIAIRE</th>
-                    <th>TELEPHONE</th>
-                    <th>ADRESSE MAIL</th>
-                    <th>ADRESSE</th>
+                    <th>OPTIONS</th>
                 </tr>
             </thead>
             <tbody>
                 {% for stagiaire in session.stagiaires %}
                     <tr>
                         <td>{{stagiaire.prenom ~' '~ stagiaire.nom}}</td>
-                        <td>{{ stagiaire.phone }}</td>
-                        <td>{{ stagiaire.mail }}</td>
-                        <td>{{ stagiaire.adress ~' '~ stagiaire.cp ~' '~ stagiaire.city }}</td>
+                        <td><i class="fa-solid fa-trash"></i></td>
+
                     </tr> 
                 {% endfor %}
             </tbody>
         </table>
 
         {% endif %}
+
+        <p class="noEntry">
+            <button class="noEntryButton">
+                <a href="">Ajouter un stagiaire</a>
+            </button>
+        </p>
     </section>
 
 
