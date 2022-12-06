@@ -79,9 +79,9 @@ class SessionController extends AbstractController
 
 // FONCTION D'AJOUT DE STAGIAIRE
     /**
-        * @Route("/session/formation/{idsess}/add/{idstag}", name="addStagiaire")
-        * @ParamConverter("session", options={"mapping" : {"idsess": "id"}})
-        * @ParamConverter("stagiaire", options={"mapping": {"idstag": "id"}})
+        * @Route("/session/formation/{idSession}/add/{idStagiaire}", name="addStagiaire")
+        * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
+        * @ParamConverter("stagiaire", options={"mapping": {"idStagiaire": "id"}})
     */
     //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
     //mapping: Configures the properties and values to use with the findOneBy() method: the key is the route placeholder name and the value is the Doctrine property name
@@ -99,7 +99,7 @@ class SessionController extends AbstractController
 
 // FONCTION DE SUPPRESSION DE STAGIAIRE 
     /**
-        * @Route("/session/formation/{idsess}/remove/{idstag}", name="removeStagiaire")
+        * @Route("/session/formation/{idSession}/remove/{idStagiaire}", name="removeStagiaire")
         * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
         * @ParamConverter("stagiaire", options={"mapping": {"idStagiaire": "id"}})
     */
