@@ -3,7 +3,12 @@
 {% block title %}Ajout d'une session{% endblock %}
 
 {% block body %}
-    <h1>Ajout d'une session</h1>
+    {% if edit %}
+        <h1>Modification d'une session</h1>
+    {% else %}
+        <h1>Ajout d'une session</h1>   
+    {% endif %}
+
 
     {{ form(formAddSession) }}
 

@@ -3,7 +3,11 @@
 {% block title %}Ajout d'un formateur{% endblock %}
 
 {% block body %}
-    <h1>Ajout d'un formateur</h1>
+    {% if edit %}
+        <h1>Modification d'un formateur</h1>
+    {% else %}
+        <h1>Ajout d'un formateur</h1>
+    {% endif %}
 
     {{ form(formAddFormateur) }}
 
