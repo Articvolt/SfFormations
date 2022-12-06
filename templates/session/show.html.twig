@@ -36,7 +36,7 @@
             {% for programme in session.programmers %}
                   <tr>
                     <td>{{programme.module.nomModule}}</td>
-                    <td>({{programme.duree}} heures)</td>
+                    <td>({{programme.duree}} jours)</td>
                     <td>
                         <i class="fa-solid fa-trash"></i>
                     </td>
@@ -59,7 +59,7 @@
 
 
     <section>
-        <h2>Stagiaires inscrits /{{session.placeTotal}}</h2>
+        <h2>Stagiaires inscrits  {{session.stagiaires | length}} / {{session.placeTotal}}</h2>
 
         {% if session.stagiaires | length == 0 %}
             
@@ -86,7 +86,7 @@
         {% endif %}
 
 
-        <h2>Stagiaires disponibles</h2>
+        <h2>Stagiaires disponibles {{ nonInscrits | length }}</h2>
 
         {% if nonInscrits | length == 0 %}
             
