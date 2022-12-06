@@ -79,15 +79,18 @@ class SessionController extends AbstractController
 
 // FONCTION D'AJOUT DE STAGIAIRE
     /**
-         * @Route("/session/formation/{idsess}/add/{idstag}", name="addStagiaire")
-         * @ParamConverter("session", options={"mapping" : {"idsess": "id"}})
-         * @ParamConverter("stagiaire", options={"mapping": {"idstag": "id"}})
-     */
+        * @Route("/session/formation/{idsess}/add/{idstag}", name="addStagiaire")
+        * @ParamConverter("session", options={"mapping" : {"idsess": "id"}})
+        * @ParamConverter("stagiaire", options={"mapping": {"idstag": "id"}})
+    */
+    //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
     public function addParticipant(ManagerRegistry $doctrine, SessionFormation $session, Stagiaire $stagiaire){
 
         $em = $doctrine->getManager();
         $session->addStagiaire($stagiaire);
+        //prepare
         $em->persist($session);
+        //execute
         $em->flush();
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
 
@@ -96,15 +99,17 @@ class SessionController extends AbstractController
 // FONCTION DE SUPPRESSION DE STAGIAIRE 
     /**
         * @Route("/session/formation/{idsess}/remove/{idstag}", name="removeStagiaire")
-        * @ParamConverter("session", options={"mapping" : {"idsess": "id"}})
-        * @ParamConverter("stagiaire", options={"mapping": {"idstag": "id"}})
-     */
-
+        * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
+        * @ParamConverter("stagiaire", options={"mapping": {"idStagiaire": "id"}})
+    */
+    //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
     public function removeParticipant(ManagerRegistry $doctrine, SessionFormation $session, Stagiaire $stagiaire){
 
         $em = $doctrine->getManager();
         $session->removeStagiaire($stagiaire);
+        //prepare
         $em->persist($session);
+        //execute
         $em->flush();
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
 
