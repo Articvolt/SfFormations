@@ -88,28 +88,34 @@
 
         <h2>Stagiaires disponibles {{ nonInscrits | length }}</h2>
 
-        {% if nonInscrits | length == 0 %}
-            
-            <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire disponibles <i class="fa-solid fa-triangle-exclamation"></i></p>
-    
-        {% else %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>STAGIAIRE</th>
-                        <th>OPTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for stagiaire in nonInscrits %}
+        {% if (session.stagiaires | length)  < (session.placeTotal ) %}
+            {% if nonInscrits | length == 0 %}
+                
+                <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire disponibles <i class="fa-solid fa-triangle-exclamation"></i></p>
+        
+            {% else %}
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{stagiaire.prenom ~' '~ stagiaire.nom}}</td>
-                            <td><a href="{{path('addStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i class="fa-solid fa-user-plus"></i></a></td>
+                            <th>STAGIAIRE</th>
+                            <th>OPTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stagiaire in nonInscrits %}
+                            <tr>
+                                <td>{{stagiaire.prenom ~' '~ stagiaire.nom}}</td>
+                                <td><a href="{{path('addStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i class="fa-solid fa-user-plus"></i></a></td>
 
-                        </tr> 
-                    {% endfor %}
-                </tbody>
-            </table>
+                            </tr> 
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% else %}
+
+        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Plus de place disponibles <i class="fa-solid fa-triangle-exclamation"></i></p>
+
         {% endif %}
     </section>
 
