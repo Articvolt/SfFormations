@@ -41,8 +41,8 @@
                 <tbody>
                     {% for session in stagiaire.sessions %}
                         <tr>
-                            <td>{{ session.intitule }}</td>
-                            <td>{{ session.formateur }}</td>
+                            <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                            <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
                             <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
                         </tr> 
                     {% endfor %}
