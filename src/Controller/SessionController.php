@@ -84,6 +84,7 @@ class SessionController extends AbstractController
         * @ParamConverter("stagiaire", options={"mapping": {"idstag": "id"}})
     */
     //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
+    //mapping: Configures the properties and values to use with the findOneBy() method: the key is the route placeholder name and the value is the Doctrine property name
     public function addParticipant(ManagerRegistry $doctrine, SessionFormation $session, Stagiaire $stagiaire){
 
         $em = $doctrine->getManager();
@@ -103,6 +104,7 @@ class SessionController extends AbstractController
         * @ParamConverter("stagiaire", options={"mapping": {"idStagiaire": "id"}})
     */
     //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
+    //mapping: Configures the properties and values to use with the findOneBy() method: the key is the route placeholder name and the value is the Doctrine property name
     public function removeParticipant(ManagerRegistry $doctrine, SessionFormation $session, Stagiaire $stagiaire){
 
         $em = $doctrine->getManager();
