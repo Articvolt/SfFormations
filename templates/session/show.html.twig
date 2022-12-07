@@ -45,16 +45,6 @@
                 </tbody>
             </table>
         {% endif %}
-        
-        <br>
-    
-        <p class="noEntry">
-            <button class="noEntryButton">
-                <a href="">Ajouter un module</a>
-            </button>
-        </p>
-
-       
     </section>
 
 
@@ -78,7 +68,6 @@
                         <tr>
                             <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom ~' '~ stagiaire.nom}}</a></td>
                             <td><a href="{{path('removeStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i class="fa-solid fa-user-minus"></i></a></td>
-
                         </tr> 
                     {% endfor %}
                 </tbody>

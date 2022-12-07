@@ -10,6 +10,7 @@ use App\Entity\SessionFormation;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\SessionFormationRepository;
+use App\Repository\ModuleRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -123,16 +124,15 @@ class SessionController extends AbstractController
     /**
         * @Route("/session/formation/{idSession}/remove/{idProgramme}", name="removeProgramme")
         * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
-        * @ParamConverter("programmer", options={"mapping": {"idProgramme": "id"}})
+        * @ParamConverter("programme", options={"mapping": {"idProgramme": "id"}})
     */
-    //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
-    //mapping: Configures the properties and values to use with the findOneBy() method: the key is the route placeholder name and the value is the Doctrine property name
-    public function removeProgramme(ManagerRegistry $doctrine, SessionFormation $session, Programmer $programmer): Response {
+    public function removeProgramme(ManagerRegistry $doctrine, SessionFormation $session, Programmer $programmer) {
 
         $entityManager = $doctrine->getManager();
+        // enleve de la collection de la base de données
         $entityManager->remove($programmer);
-        //execute
         $entityManager->flush();
+
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
 
     }
