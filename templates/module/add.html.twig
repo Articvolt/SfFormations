@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'un module {% endblock %}
+{% block title %}
+    {% if edit %}
+            MODIFICATION D'UN MODULE
+        {% else %}
+            AJOUT D'UN MODULE
+        {% endif %} 
+{% endblock %}
 
 {% block body %}
     {% if edit %}

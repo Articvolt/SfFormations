@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'un formateur{% endblock %}
+{% block title %}
+    {% if edit %}
+        MODIFICATION D'UN FORMATEUR
+    {% else %}
+        AJOUT D'UN FORMATEUR
+    {% endif %}
+{% endblock %}
 
 {% block body %}
     {% if edit %}

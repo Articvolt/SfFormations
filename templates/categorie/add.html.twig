@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'un categorie{% endblock %}
+{% block title %}
+    {% if edit %}
+        MODIFICATION D'UNE CATEGORIE
+    {% else %}
+        AJOUT D'UNE CATEGORIE
+    {% endif %}
+{% endblock %}
 
 {% block body %}
     {% if edit %}
