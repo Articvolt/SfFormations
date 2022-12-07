@@ -88,9 +88,10 @@ article {
 
 table {
     border-collapse: collapse;
-    margin: auto;
+    margin: 1em auto;
     border-radius: 1em;
     overflow: hidden;
+    
 }
 
 table th {
@@ -168,4 +169,15 @@ p .addButton a:hover {
 
 .form-button {
     color: #EA3546;
+}
+
+/* -------------------- AFFICHAGE SESSION SHOW ------------------------ */
+
+.showSessionArticle {
+    display: flex;
+    justify-content: space-around;
+}
+
+.formDuree input {
+    width: 50px;
 }

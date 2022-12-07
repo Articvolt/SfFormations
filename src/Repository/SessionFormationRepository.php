@@ -108,7 +108,6 @@ class SessionFormationRepository extends ServiceEntityRepository
 
 
 // FONCTION QUI AFFICHE LES STAGIAIRES NON INSCRITS 
-
     public function findNonInscrits($session_id) {
         $em = $this->getEntityManager();
         // em->entityManager
@@ -134,6 +133,34 @@ class SessionFormationRepository extends ServiceEntityRepository
             ->orderBy('st.nom');
 
         $query = $nonInscrit->getQuery();
+        return $query->getResult();
+    }
+
+
+// FONCTION QUI AFFICHE LES MODULES DISPONIBLES
+    public function findModuleDisponible($session_id) {
+        $em = $this->getEntityManager();
+        // em->entityManager
+        // createQueryBuilder ->classe qui créer une requête PHP
+        $moduleDisponible = $em->createQueryBuilder();
+
+        // sous-Requête SQL
+        $sql = $moduleDisponible;
+        $sql->select('m')
+           ->from('App\Entity\Module','m')
+           ->leftJoin('m.programmers', 'pr')
+           ->where('pr.session = :id');
+
+        // Interaction avec l'entité module
+        $moduleDisponible = $em->createQueryBuilder();
+        $moduleDisponible->select('mo')
+            ->from('App\Entity\Module', 'mo')
+            // recupère tout les module et récupère ceux qui ne sont pas ("notIn") dans la liste
+            ->where($moduleDisponible->expr()->notIn('mo.id', $sql->getDQL()))
+            ->setParameter('id', $session_id)
+            ->orderBy('mo.nomModule');
+
+        $query = $moduleDisponible->getQuery();
         return $query->getResult();
     }
 }

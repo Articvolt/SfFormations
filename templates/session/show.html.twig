@@ -4,58 +4,119 @@
 
 {% block body %}
 
-    <h1>{{ session.intitule }}</h1>
+<h1>{{ session.intitule }}</h1>
 
-    <section class="sectionDescription">
-        <h2>Informations complémentaires</h2>
+<section class="sectionDescription">
+    <h2>Informations complémentaires</h2>
 
-        <h3>Formateur référent </h3>
-        <p><a class="linkAnchor" href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></p>
+    <h3>Formateur référent </h3>
+    <p><a class="linkAnchor" href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur
+            }}</a></p>
 
-        <h3>durée : </h3>
-        <p>{{ session.dateDebut|date("d/m/Y") ~' au '~ session.dateFin|date("d/m/Y")  }}</p>
-    </section>
-     
+    <h3>durée : </h3>
+    <p>{{ session.dateDebut|date("d/m/Y") ~' au '~ session.dateFin|date("d/m/Y") }}</p>
+</section>
+
+<article class="showSessionArticle">
     <section>
         <h2>Modules</h2>
 
         {% if session.programmers | length == 0 %}
-            
-        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Il n'y a pas de modules dans cette session <i class="fa-solid fa-triangle-exclamation"></i></p>
+
+        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Il n'y a pas de modules dans cette session
+            <i class="fa-solid fa-triangle-exclamation"></i></p>
 
         {% else %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>MODULE</th>
-                        <th>DUREE</th>
-                        <th>OPTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-            {% for programme in session.programmers %}
-                  <tr>
-                    <td><a href="{{ path('show_categorie', {'id': programme.module.categorie.id})}}">{{programme.module.nomModule}}</a></td>
+        <table>
+            <thead>
+                <tr>
+                    <th>MODULE</th>
+                    <th>DUREE</th>
+                    <th>OPTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for programme in session.programmers %}
+                <tr>
+                    <td><a
+                            href="{{ path('show_categorie', {'id': programme.module.categorie.id})}}">{{programme.module}}</a>
+                    </td>
                     <td>({{programme.duree}} jours)</td>
                     <td>
-                        <a href="{{path('removeProgramme', {'idSession':session.id , 'idProgramme':programme.id})}}"><i class="fa-solid fa-trash"></i></a>
+                        <a href="{{path('removeProgramme', {'idSession':session.id , 'idProgramme':programme.id})}}"><i
+                                class="fa-solid fa-trash"></i></a>
                     </td>
-                  </tr>             
-            {% endfor %}
-                </tbody>
-            </table>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         {% endif %}
+
+        <h2>Ajouts de modules</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>MODULE</th>
+                    <th>DUREE</th>
+                    <th>OPTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for module in moduleDisponible %}
+                   
+                <td><a href="{{ path('show_categorie', {'id': module.categorie.id})}}">{{module}}</a></td>
+                    <td>
+                        <form class="formDuree" method="post">                 
+                            <input type="number" name="duree" min="0" required>
+                            <label>jours</label>  
+                        </form>
+                    </td>
+                    <td><i class="fa-solid fa-plus"></i></td>
+                </tr>                  
+                {% endfor %}
+            </tbody>
+        </table>
     </section>
+    {# alt + maj + F (tout reformater) #}
 
 
     <section>
-        <h2>Stagiaires inscrits  {{session.stagiaires | length}} / {{session.placeTotal}}</h2>
+        <h2>Stagiaires inscrits {{session.stagiaires | length}} / {{session.placeTotal}}</h2>
 
         {% if session.stagiaires | length == 0 %}
-            
-        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire d'inscrits <i class="fa-solid fa-triangle-exclamation"></i></p>
-    
+
+        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire d'inscrits <i
+                class="fa-solid fa-triangle-exclamation"></i></p>
+
         {% else %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>STAGIAIRE</th>
+                    <th>OPTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stagiaire in session.stagiaires %}
+                <tr>
+                    <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire}}</a></td>
+                    <td><a href="{{path('removeStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i
+                                class="fa-solid fa-user-minus"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+
+
+
+        {% if (session.stagiaires | length) < (session.placeTotal ) %} {% if nonInscrits | length==0 %} {% else %} <h2>
+            Stagiaires disponibles {{ nonInscrits | length }}</h2>
+
             <table>
                 <thead>
                     <tr>
@@ -64,50 +125,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for stagiaire in session.stagiaires %}
-                        <tr>
-                            <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom ~' '~ stagiaire.nom}}</a></td>
-                            <td><a href="{{path('removeStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i class="fa-solid fa-user-minus"></i></a></td>
-                        </tr> 
+                    {# for ELEMENT in TABLEAU #}
+                    {% for stagiaire in nonInscrits %}
+                    <tr>
+                        <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom ~' '~
+                                stagiaire.nom}}</a></td>
+                        <td><a href="{{path('addStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i
+                                    class="fa-solid fa-user-plus"></i></a></td>
+
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        {% endif %}
-
-
-        <h2>Stagiaires disponibles {{ nonInscrits | length }}</h2>
-
-        {% if (session.stagiaires | length)  < (session.placeTotal ) %}
-            {% if nonInscrits | length == 0 %}
-                
-                <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Aucun stagiaire disponibles <i class="fa-solid fa-triangle-exclamation"></i></p>
-        
-            {% else %}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>STAGIAIRE</th>
-                            <th>OPTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {# for ELEMENT in TABLEAU #}
-                        {% for stagiaire in nonInscrits %}
-                            <tr>
-                                <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom ~' '~ stagiaire.nom}}</a></td>
-                                <td><a href="{{path('addStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i class="fa-solid fa-user-plus"></i></a></td>
-
-                            </tr> 
-                        {% endfor %}
-                    </tbody>
-                </table>
             {% endif %}
-        {% else %}
-
-        <p class="noEntry"><i class="fa-solid fa-triangle-exclamation"></i> Plus de place disponibles <i class="fa-solid fa-triangle-exclamation"></i></p>
-
-        {% endif %}
+            {% else %}
+            {% endif %}
     </section>
+</article>
 
 
 {% endblock %}
