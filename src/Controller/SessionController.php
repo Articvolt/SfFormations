@@ -120,12 +120,14 @@ class SessionController extends AbstractController
 
     }
 
-// FONCTION QUI SUPPRIME UN MODULE 
+// FONCTION QUI SUPPRIME UN PROGRAMME
     /**
-        * @Route("/session/formation/{idSession}/remove/{idProgramme}", name="removeProgramme")
+        * @Route("/session/formation/{idSession}/removeProgramme/{idProgramme}", name="removeProgramme")
         * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
-        * @ParamConverter("programme", options={"mapping": {"idProgramme": "id"}})
+        * @ParamConverter("programmer", options={"mapping": {"idProgramme": "id"}})
     */
+    // ATTENTION, la route ne doit pas être identique a celle d'un autre !!! "/removeProgramme" a éte mis a la place de "remove"
+    // on appelle la variable $programmer dans le @paramConverter !!
     public function removeProgramme(ManagerRegistry $doctrine, SessionFormation $session, Programmer $programmer) {
 
         $entityManager = $doctrine->getManager();
