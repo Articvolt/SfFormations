@@ -29,7 +29,7 @@ class SessionController extends AbstractController
     }
 
 
-    // FONCTION D'AJOUT ET D'EDITION DE SESSION ------------------------------------------
+    // FONCTION D'AJOUT ET D'EDITION DE SESSION ------------------------------------------------
     /**
      * @Route("/session/add", name="add_session")
      * @Route("/session/{id}/edit", name="edit_session")
@@ -65,7 +65,8 @@ class SessionController extends AbstractController
         ]);
     }
 
-    // SUPPRESSION SESSION ---------------------------------------------------------
+
+// SUPPRESSION SESSION -----------------------------------------------------------------
     /**
      * @Route("session/{id}/delete", name="delete_session")
      */
@@ -80,7 +81,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
-    // FONCTION D'AJOUT DE STAGIAIRE
+// FONCTION D'AJOUT DE STAGIAIRE ---------------------------------------------
     /**
      * @Route("/session/formation/{idSession}/add/{idStagiaire}", name="addStagiaire")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
@@ -100,7 +101,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
 
-    // FONCTION DE SUPPRESSION DE STAGIAIRE 
+// FONCTION DE SUPPRESSION DE STAGIAIRE ------------------------------------------------------ 
     /**
      * @Route("/session/formation/{idSession}/remove/{idStagiaire}", name="removeStagiaire")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
@@ -121,7 +122,7 @@ class SessionController extends AbstractController
     }
 
 
-// FONCTION D'AJOUT DE STAGIAIRE
+// FONCTION D'AJOUT DE STAGIAIRE -------------------------------------------------------------
     /**
      * @Route("/session/formation/{idSession}/addProgramme/{idProgramme}", name="addProgramme")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
@@ -138,7 +139,9 @@ class SessionController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
-    // FONCTION QUI SUPPRIME UN PROGRAMME
+
+
+// FONCTION QUI SUPPRIME UN PROGRAMME -------------------------------------------------
     /**
      * @Route("/session/formation/{idSession}/removeProgramme/{idProgramme}", name="removeProgramme")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
@@ -158,7 +161,7 @@ class SessionController extends AbstractController
     }
 
 
-    // FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID ----------------------------
+ // FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID ----------------------------
     /**
      * @Route("/session/{id}", name="show_session", requirements={"id"="\d+"})
      */
