@@ -111,9 +111,13 @@ class SessionFormationRepository extends ServiceEntityRepository
 
     public function findNonInscrits($session_id) {
         $em = $this->getEntityManager();
+        // em->entityManager
+        // createQueryBuilder ->classe qui créer une requête PHP
         $nonInscrit = $em->createQueryBuilder();
 
-        // Requête SQL
+        // sous-Requête SQL
+        // s->stagiaire
+        // se->session
         $sql = $nonInscrit;
         $sql->select('s')
            ->from('App\Entity\Stagiaire','s')
@@ -124,12 +128,12 @@ class SessionFormationRepository extends ServiceEntityRepository
         $nonInscrit = $em->createQueryBuilder();
         $nonInscrit->select('st')
             ->from('App\Entity\Stagiaire', 'st')
+            // recupère tout les stagiaire et récupère ceux qui ne sont pas ("notIn") dans la liste
             ->where($nonInscrit->expr()->notIn('st.id', $sql->getDQL()))
             ->setParameter('id', $session_id)
             ->orderBy('st.nom');
 
         $query = $nonInscrit->getQuery();
         return $query->getResult();
-
     }
 }

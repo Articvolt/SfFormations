@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
+use App\Entity\Programmer;
 use App\Entity\SessionFormation;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -116,6 +118,25 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
 
     }
+
+// FONCTION QUI SUPPRIME UN MODULE 
+    /**
+        * @Route("/session/formation/{idSession}/remove/{idProgramme}", name="removeProgramme")
+        * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
+        * @ParamConverter("programmer", options={"mapping": {"idProgramme": "id"}})
+    */
+    //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
+    //mapping: Configures the properties and values to use with the findOneBy() method: the key is the route placeholder name and the value is the Doctrine property name
+    public function removeProgramme(ManagerRegistry $doctrine, SessionFormation $session, Programmer $programmer): Response {
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($programmer);
+        //execute
+        $entityManager->flush();
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+
+    }
+
 
 // FONCTION QUI RECUPERE LE STAGIAIRE DE LA BDD PAR SON ID ----------------------------
     /**
