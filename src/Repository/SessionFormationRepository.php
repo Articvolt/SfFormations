@@ -158,7 +158,7 @@ class SessionFormationRepository extends ServiceEntityRepository
             // recupère tout les module et récupère ceux qui ne sont pas ("notIn") dans la liste
             ->where($moduleDisponible->expr()->notIn('mo.id', $sql->getDQL()))
             ->setParameter('id', $session_id)
-            ->orderBy('mo.nomModule');
+            ->orderBy('mo.categorie');
 
         $query = $moduleDisponible->getQuery();
         return $query->getResult();

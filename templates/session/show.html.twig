@@ -31,6 +31,7 @@
             <thead>
                 <tr>
                     <th>MODULE</th>
+                    <th>CATEGORIE</th>
                     <th>DUREE</th>
                     <th>OPTIONS</th>
                 </tr>
@@ -38,8 +39,9 @@
             <tbody>
                 {% for programme in session.programmers %}
                 <tr>
-                    <td><a
-                            href="{{ path('show_categorie', {'id': programme.module.categorie.id})}}">{{programme.module}}</a>
+                    <td>{{programme.module}}</td>
+                    <td>
+                        <a href="{{ path('show_categorie', {'id': programme.module.categorie.id})}}">{{programme.module.categorie}}</a>
                     </td>
                     <td>({{programme.duree}} jours)</td>
                     <td>
@@ -62,6 +64,7 @@
                 <thead>
                     <tr>
                         <th>MODULE</th>
+                        <th>CATEGORIE</th>
                         <th>DUREE</th>
                         <th>OPTIONS</th>
                     </tr>
@@ -70,17 +73,20 @@
                     <tr> 
                         {% for module in moduleDisponible %}
                     
-                        <td><a href="{{ path('show_categorie', {'id': module.categorie.id})}}">{{module}}</a></td>
-                            <td>
-                                <form class="formDuree" action="addDuree" method="post">                 
-                                    <input type="number" name="duree" value="0" min="0" required>
-                                    <label>jours</label>  
-                                </td>
-                                <td>
-                                    <button type="submit">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                </td>
+                        <td>{{module}}</td>
+                        <td>
+                            <a href="{{ path('show_categorie', {'id': module.categorie.id})}}">{{module.categorie}}</a>
+                        </td>
+                        <td>
+                            <form class="formDuree" action="addDuree" method="post">                 
+                            <input type="number" name="duree" value="0" min="0" required>
+                            <label>jours</label>  
+                        </td>
+                        <td>
+                            <button type="submit">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </td>
                             </form>
                     </tr>                  
                         {% endfor %}

@@ -122,7 +122,7 @@ class SessionController extends AbstractController
     }
 
 
-// FONCTION D'AJOUT DE STAGIAIRE -------------------------------------------------------------
+// FONCTION D'AJOUT D'UN PROGRAMME -------------------------------------------------------------
     /**
      * @Route("/session/formation/{idSession}/addProgramme/{idProgramme}", name="addProgramme")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
