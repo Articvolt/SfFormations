@@ -52,36 +52,41 @@
         </table>
         {% endif %}
 
-        <h2>Ajouts de modules</h2>
+        {% if moduleDisponible | length == 0 %}
+        
+        
+        {% else %}
+            <h2>Ajouts de modules</h2>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>MODULE</th>
-                    <th>DUREE</th>
-                    <th>OPTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                {% for module in moduleDisponible %}
-                   
-                <td><a href="{{ path('show_categorie', {'id': module.categorie.id})}}">{{module}}</a></td>
-                    <td>
-                        <form class="formDuree" action="addDuree" method="post">                 
-                            <input type="number" name="duree" value="0" min="0" required>
-                            <label>jours</label>  
-                        </td>
-                        <td>
-                            <button type="submit">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </td>
-                    </form>
-                </tr>                  
-                {% endfor %}
-            </tbody>
-        </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>MODULE</th>
+                        <th>DUREE</th>
+                        <th>OPTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr> 
+                        {% for module in moduleDisponible %}
+                    
+                        <td><a href="{{ path('show_categorie', {'id': module.categorie.id})}}">{{module}}</a></td>
+                            <td>
+                                <form class="formDuree" action="addDuree" method="post">                 
+                                    <input type="number" name="duree" value="0" min="0" required>
+                                    <label>jours</label>  
+                                </td>
+                                <td>
+                                    <button type="submit">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </td>
+                            </form>
+                    </tr>                  
+                        {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </section>
     {# alt + maj + F (tout reformater) #}
 
@@ -118,8 +123,14 @@
 
 
 
-        {% if (session.stagiaires | length) < (session.placeTotal ) %} {% if nonInscrits | length==0 %} {% else %} <h2>
-            Stagiaires disponibles {{ nonInscrits | length }}</h2>
+        {% if (session.stagiaires | length) < (session.placeTotal ) %} 
+        
+        {% if nonInscrits | length==0 %} 
+        
+        
+        {% else %} 
+        
+        <h2>Stagiaires disponibles {{ nonInscrits | length }}</h2>
 
             <table>
                 <thead>
