@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Entity\Programmer;
@@ -124,19 +125,29 @@ class SessionController extends AbstractController
 
 // FONCTION D'AJOUT D'UN PROGRAMME -------------------------------------------------------------
     /**
-     * @Route("/session/formation/{idSession}/addProgramme/{idProgramme}", name="addProgramme")
+     * @Route("/session/formation/{idSession}/addProgramme/{idModule}", name="addProgramme")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
-     * @ParamConverter("programme", options={"mapping": {"idProgramme": "id"}})
+     * @ParamConverter("module", options={"mapping": {"idModule": "id"}})
      */
-    public function addProgramme(ManagerRegistry $doctrine, SessionFormation $session, Programmer $programmer)
+    public function addProgramme(ManagerRegistry $doctrine, Request $request, SessionFormation $session, Module $module)
     {
+        // création d'un nouvel objet programmer
+        $programmer= new Programmer();
+        // récupération de l'input "duree" avec request
+        $duree = $request->request->get('duration');
+
 
         $em = $doctrine->getManager();
-        $session->addProgrammer($programmer);
+
+        //setter de l'entité programmer
+        $programmer->setModule($module);
+        $programmer->setSession($session);
+        $programmer->setDuree($duree);
         //prepare
-        $em->persist($session);
+        $em->persist($programmer);
         //execute
         $em->flush();
+
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
 

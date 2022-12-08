@@ -75,15 +75,15 @@
                     
                         <td>{{module}}</td>
                         <td>
-                            <a href="{{ path('show_categorie', {'id': module.categorie.id})}}">{{module.categorie}}</a>
+                            <a href="{{ path('show_categorie', {'id': module.categorie.id}) }}">{{module.categorie}}</a>
                         </td>
                         <td>
-                            <form class="formDuree" action="addDuree" method="post">                 
-                            <input type="number" name="duree" value="0" min="0" required>
+                            <form action="{{ path('addProgramme', {'idSession' :session.id , 'idModule' : module.id}) }}" method="post">                 
+                            <input type="number" name="duration" id="duration" value="0" min="1" id="jours" required>
                             <label>jours</label>  
                         </td>
                         <td>
-                            <button type="submit">
+                            <button type="submit" value="ajouter">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </td>
