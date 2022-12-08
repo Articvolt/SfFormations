@@ -24,4 +24,11 @@ class HomeController extends AbstractController
             'postSessions' => $postSessions
         ]);
     }
+
+    /**
+     *  @Route("/profil", name="app_profil")
+     */
+    public function profil(): Response {
+        return $this->render('home/profil.html.twig');
+    }
 }

@@ -13,6 +13,17 @@
     </head>
 
     <body>
+       
+
+    {# barre de connexion #}
+        {% if app.user %}
+            <a href="{{ path('app_profil') }}">Mon profil</a>
+            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_register') }}">S'inscrire</a>
+            <a href="{{ path('app_login') }}">Se connecter</a>
+            
+        {% endif %}
         {# barre de navigation #}
         <nav>
             <ul>

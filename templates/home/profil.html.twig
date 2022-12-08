@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PROFIL{% endblock %}
+
+{% block body %}
+    <h1>{{app.user.pseudonyme}}</h1>
+
+    <p>Adresse mail : {{app.user.email}}</p>
+{% endblock %}
