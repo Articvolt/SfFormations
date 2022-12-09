@@ -17,15 +17,36 @@
 
     {# barre de connexion #}
         {% if app.user %}
-            <a href="{{ path('app_profil') }}">Mon profil</a>
-            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        <div class="connect">
+            <ul>
+                <li>
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_profil') }}">Mon profil <i class="fa-solid fa-user"></i></a>
+                </li>
+            </ul>
+        </div>
+        
+         
+        
         {% else %}
-            <a href="{{ path('app_register') }}">S'inscrire</a>
-            <a href="{{ path('app_login') }}">Se connecter</a>
-            
+        <div class="connect">
+            <ul>
+                <li>
+                    <a href="{{ path('app_login') }}">Se connecter</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_register') }}">S'inscrire</a>
+                </li>
+            </ul>
+        </div>
+         
+        
         {% endif %}
+
         {# barre de navigation #}
-        <nav>
+        <nav class="navbar">
             <ul>
                 <li><a href="{{ path('app_home') }}">Accueil</a></li>
                 <li><a href="{{ path('app_categorie') }}">Categories</a></li>

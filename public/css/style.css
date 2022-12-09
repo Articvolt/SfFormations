@@ -11,24 +11,23 @@ body {
 
 /*------------------------------- NAVBAR ------------------------------------ */
 
-nav {
+.navbar {
     padding: 1rem;
 }
 
-nav ul {
+.navbar ul {
     display: flex;
     justify-content: space-around;
     margin: 2rem;
     
 }
 
-nav ul li {
+.navbar ul li {
     list-style: none;
     transition: 0.4s;
 }
 
-nav ul li a {
-    text-decoration: none;
+.navbar ul li a {
     text-transform: uppercase;
     text-decoration: underline 0.15em rgb(34,34,34,0);
     transition: text-decoration-color 500ms;
@@ -37,11 +36,25 @@ nav ul li a {
     font-size: 20px;
 }
 
-nav ul li a:hover {
+.navbar ul li a:hover {
     text-decoration-color: #E0DDCF;
 }
 
+/*------------------------ CONNECT BAR ------------------------------------------ */
 
+.connect {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.connect ul li {
+    list-style: none;
+}
+
+.connect ul li a {
+    text-decoration: none;
+    color: rgb(34,34,34);
+}
 /* ---------------------------------------------------- */
 h1 {
     color: #E0DDCF ;
