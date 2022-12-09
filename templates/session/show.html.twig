@@ -10,8 +10,15 @@
     <h2>Informations complémentaires</h2>
 
     <h3>Formateur référent </h3>
-    <p><a class="linkAnchor" href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur
-            }}</a></p>
+    {% if app.user %}
+        <p>
+            <a class="linkAnchor" href="{{ path('show_formateur', {'id': session.formateur.id})}}">
+                {{ session.formateur}}
+            </a>
+        </p>
+    {% else %}
+        <p>{{ session.formateur}}</p>
+    {% endif %}
 
     <h3>durée : </h3>
     <p>{{ session.dateDebut|date("d/m/Y") ~' au '~ session.dateFin|date("d/m/Y") }}</p>
@@ -30,10 +37,13 @@
         <table>
             <thead>
                 <tr>
+                    
                     <th>MODULE</th>
                     <th>CATEGORIE</th>
                     <th>DUREE</th>
+                {% if app.user %}
                     <th>OPTIONS</th>
+                {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -44,11 +54,13 @@
                         <a href="{{ path('show_categorie', {'id': programme.module.categorie.id})}}">{{programme.module.categorie}}</a>
                     </td>
                     <td>({{programme.duree}} jours)</td>
-                    <td>
-                        <a href="{{path('removeProgramme', {'idSession':session.id , 'idProgramme':programme.id})}}">
-                            <i class="fa-solid fa-minus"></i>
-                        </a>
-                    </td>
+                    {% if app.user %}
+                        <td>
+                            <a href="{{path('removeProgramme', {'idSession':session.id , 'idProgramme':programme.id})}}">
+                                <i class="fa-solid fa-minus"></i>
+                            </a>
+                        </td>    
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
@@ -57,42 +69,43 @@
 
         {% if moduleDisponible | length == 0 %}
         
-        
         {% else %}
-            <h2>Ajouts de modules</h2>
+            {% if app.user %}
+                <h2>Ajouts de modules</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>MODULE</th>
-                        <th>CATEGORIE</th>
-                        <th>DUREE</th>
-                        <th>OPTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr> 
-                        {% for module in moduleDisponible %}
-                    
-                        <td>{{module}}</td>
-                        <td>
-                            <a href="{{ path('show_categorie', {'id': module.categorie.id}) }}">{{module.categorie}}</a>
-                        </td>
-                        <td>
-                            <form action="{{ path('addProgramme', {'idSession' :session.id , 'idModule' : module.id}) }}" method="post">                 
-                            <input type="number" name="duration" id="duration" value="0" min="1" id="jours" required>
-                            <label>jours</label>  
-                        </td>
-                        <td>
-                            <button type="submit" value="ajouter">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </td>
-                            </form>
-                    </tr>                  
-                        {% endfor %}
-                </tbody>
-            </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MODULE</th>
+                            <th>CATEGORIE</th>
+                            <th>DUREE</th>
+                            <th>OPTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr> 
+                            {% for module in moduleDisponible %}
+                        
+                            <td>{{module}}</td>
+                            <td>
+                                <a href="{{ path('show_categorie', {'id': module.categorie.id}) }}">{{module.categorie}}</a>
+                            </td>
+                            <td>
+                                <form action="{{ path('addProgramme', {'idSession' :session.id , 'idModule' : module.id}) }}" method="post">                 
+                                <input type="number" name="duration" id="duration" value="0" min="1" id="jours" required>
+                                <label>jours</label>  
+                            </td>
+                            <td>
+                                <button type="submit" value="ajouter">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </td>
+                                </form>
+                        </tr>                  
+                            {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
         {% endif %}
     </section>
     {# alt + maj + F (tout reformater) #}
@@ -111,58 +124,82 @@
         <table>
             <thead>
                 <tr>
-                    <th>STAGIAIRE</th>
-                    <th>OPTIONS</th>
+        
+                    {% if app.user %}
+                        <th>STAGIAIRE</th>
+                        <th>OPTIONS</th>
+                    {% else %}
+                        <th>STAGIAIRE</th>
+                    {% endif %}
+
                 </tr>
             </thead>
             <tbody>
                 {% for stagiaire in session.stagiaires %}
-                <tr>
-                    <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire}}</a></td>
-                    <td><a href="{{path('removeStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i
-                                class="fa-solid fa-user-minus"></i></a></td>
-                </tr>
-                {% endfor %}
+                    {% if app.user %}
+                        <tr>
+                            <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire}}</a></td>
+                            <td>
+                                <a href="{{path('removeStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}">
+                                    <i class="fa-solid fa-user-minus"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{stagiaire}}</td>
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
             </tbody>
         </table>
         {% endif %}
 
 
 
+    {% if app.user %}
+            
+        
 
         {% if (session.stagiaires | length) < (session.placeTotal ) %} 
         
-        {% if nonInscrits | length==0 %} 
+            {% if nonInscrits | length==0 %} 
         
         
         {% else %} 
         
-        <h2>Stagiaires disponibles {{ nonInscrits | length }}</h2>
+            <h2>Stagiaires disponibles {{ nonInscrits | length }}</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>STAGIAIRE</th>
-                        <th>OPTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {# for ELEMENT in TABLEAU #}
-                    {% for stagiaire in nonInscrits %}
-                    <tr>
-                        <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom ~' '~
-                                stagiaire.nom}}</a></td>
-                        <td><a href="{{path('addStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}"><i
-                                    class="fa-solid fa-user-plus"></i></a></td>
-
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STAGIAIRE</th>
+                            <th>OPTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {# for ELEMENT in TABLEAU #}
+                        {% for stagiaire in nonInscrits %}
+                        <tr>
+                            <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom ~' '~
+                                    stagiaire.nom}}</a></td>
+                            <td>
+                                <a href="{{path('addStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             {% endif %}
+
             {% else %}
-            {% endif %}
+            
+        {% endif %}
+
     </section>
+    {% endif %}
 </article>
 
 
