@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 // transite les infos en DB
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieController extends AbstractController
@@ -31,6 +32,7 @@ class CategorieController extends AbstractController
     /**
      * @Route("/categorie/add", name="add_categorie")
      * @Route("/categorie/{id}/edit", name="edit_categorie")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add(ManagerRegistry $doctrine, Categorie $categorie = null, Request $request): Response {
 
@@ -67,6 +69,7 @@ class CategorieController extends AbstractController
 // SUPPRESSION CATEGORIE--------------------------------------------------------
     /**
      * @Route("categorie/{id}/delete", name="delete_categorie")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(ManagerRegistry $doctrine, Categorie $categorie) {
 

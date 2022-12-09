@@ -41,7 +41,7 @@
                     <th>MODULE</th>
                     <th>CATEGORIE</th>
                     <th>DUREE</th>
-                {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
                     <th>OPTIONS</th>
                 {% endif %}
                 </tr>
@@ -54,7 +54,7 @@
                         <a href="{{ path('show_categorie', {'id': programme.module.categorie.id})}}">{{programme.module.categorie}}</a>
                     </td>
                     <td>({{programme.duree}} jours)</td>
-                    {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
                         <td>
                             <a href="{{path('removeProgramme', {'idSession':session.id , 'idProgramme':programme.id})}}">
                                 <i class="fa-solid fa-minus"></i>
@@ -70,7 +70,7 @@
         {% if moduleDisponible | length == 0 %}
         
         {% else %}
-            {% if app.user %}
+            {% if is_granted('ROLE_ADMIN') %}
                 <h2>Ajouts de modules</h2>
 
                 <table>
@@ -124,12 +124,9 @@
         <table>
             <thead>
                 <tr>
-        
-                    {% if app.user %}
-                        <th>STAGIAIRE</th>
-                        <th>OPTIONS</th>
-                    {% else %}
-                        <th>STAGIAIRE</th>
+                    <th>STAGIAIRE</th>
+                {% if is_granted('ROLE_ADMIN') %}   
+                    <th>OPTIONS</th>
                     {% endif %}
 
                 </tr>
@@ -139,11 +136,13 @@
                     {% if app.user %}
                         <tr>
                             <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire}}</a></td>
+                        {% if is_granted('ROLE_ADMIN') %}
                             <td>
                                 <a href="{{path('removeStagiaire', {'idSession':session.id , 'idStagiaire':stagiaire.id})}}">
                                     <i class="fa-solid fa-user-minus"></i>
                                 </a>
-                            </td>
+                            </td>     
+                        {% endif %}
                         </tr>
                     {% else %}
                         <tr>
@@ -157,7 +156,7 @@
 
 
 
-    {% if app.user %}
+    {% if is_granted('ROLE_ADMIN') %}
             
         
 

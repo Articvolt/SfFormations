@@ -15,6 +15,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+
 class AppAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
@@ -47,6 +48,11 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
+        }
+
+        // If admin is connected -> redirect page
+        if ($token->getUser()->isAdmin()) {
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
         }
 
         // For example:

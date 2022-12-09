@@ -5,7 +5,13 @@
 {% block body %}
     <h1>Liste des modules dans {{ categorie.nomCategorie }}</h1>
 
-    <p><button class="addButton"><a href=" {{ path('add_module') }} ">Ajouter un module</a></button></p>
+    {% if is_granted('ROLE_ADMIN') %}       
+    <p>
+        <button class="addButton">
+            <a href=" {{ path('add_module') }} ">Ajouter un module</a>
+        </button>
+    </p>
+    {% endif %}
 
 
     {% if categorie.modules | length == 0 %}
@@ -19,17 +25,21 @@
             <thead>
                 <tr>
                     <th>MODULE</th>
-                    <th>OPTIONS</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>OPTIONS</th>        
+                {% endif %}
                 </tr>
             </thead>
             <tbody>
                 {% for module in categorie.modules %}
                     <tr>
                         <td>{{ module.nomModule }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
                         <td>
                             <a href="{{ path('edit_module', {'id': module.id , 'idCategorie': categorie.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> 
                             <a href="{{ path('delete_module', {'id': module.id}) }}"><i class="fa-solid fa-trash"></i></a>
-                        </td>
+                        </td>    
+                    {% endif %}
                     </tr> 
                 {% endfor %}
             </tbody>

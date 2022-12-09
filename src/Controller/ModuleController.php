@@ -9,12 +9,14 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ModuleController extends AbstractController
 {
     /**
      * @Route("/categorie", name="app_module")
+     * @IsGranted("ROLE_USER")
      */
     public function index(ManagerRegistry $doctrine): Response
     {
@@ -30,6 +32,7 @@ class ModuleController extends AbstractController
     /**
      * @Route("/module/add", name="add_module")
      * @Route("/module/{id}/edit", name="edit_module")
+     * @IsGranted("ROLE_ADMIN")
      */
 public function add(ManagerRegistry $doctrine, Module $module = null, Request $request): Response 
     {
@@ -69,6 +72,7 @@ public function add(ManagerRegistry $doctrine, Module $module = null, Request $r
 // SUPPRESSION MODULE -----------------------------------------------------
     /**
      * @Route("module/{id}/delete", name="delete_module")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(ManagerRegistry $doctrine, Module $module) {
 

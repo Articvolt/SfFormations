@@ -8,12 +8,14 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FormateurController extends AbstractController
 {
     /**
      * @Route("/formateur", name="app_formateur")
+     * @IsGranted("ROLE_USER")
      */
     public function index(ManagerRegistry $doctrine): Response
     {
@@ -27,6 +29,7 @@ class FormateurController extends AbstractController
     /**
      * @Route("/formateur/add", name="add_formateur")
      * @Route("/formateur/{id}/edit", name="edit_formateur")
+     * @IsGranted("ROLE_ADMIN")
      */
 // FONCTION D'AJOUT ET D'EDITION DE FORMATEUR-----------------------------------
     public function add(ManagerRegistry $doctrine, Formateur $formateur = null, Request $request): Response {
@@ -63,6 +66,7 @@ class FormateurController extends AbstractController
 // SUPPRESSION FORMATEUR -------------------------------------------------------
     /**
      * @Route("formateur/{id}/delete", name="delete_formateur")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(ManagerRegistry $doctrine, Formateur $formateur) {
 
@@ -78,6 +82,7 @@ class FormateurController extends AbstractController
 // FONCTION QUI RECUPERE LE FORMATEUR DE LA BDD PAR SON ID----------------------------
     /**
      * @Route("/formateur/{id}", name="show_formateur")
+     * @IsGranted("ROLE_USER")
      */
     public function show(Formateur $formateur): Response
     {

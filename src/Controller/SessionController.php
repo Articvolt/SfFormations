@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\SessionFormationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -34,6 +35,7 @@ class SessionController extends AbstractController
     /**
      * @Route("/session/add", name="add_session")
      * @Route("/session/{id}/edit", name="edit_session")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add(ManagerRegistry $doctrine, SessionFormation $session = null, Request $request): Response
     {
@@ -70,6 +72,7 @@ class SessionController extends AbstractController
 // SUPPRESSION SESSION -----------------------------------------------------------------
     /**
      * @Route("session/{id}/delete", name="delete_session")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(ManagerRegistry $doctrine, SessionFormation $session)
     {
@@ -87,6 +90,7 @@ class SessionController extends AbstractController
      * @Route("/session/formation/{idSession}/add/{idStagiaire}", name="addStagiaire")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
      * @ParamConverter("stagiaire", options={"mapping": {"idStagiaire": "id"}})
+     * @IsGranted("ROLE_ADMIN")
      */
     //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
     //mapping: Configures the properties and values to use with the findOneBy() method: the key is the route placeholder name and the value is the Doctrine property name
@@ -107,6 +111,7 @@ class SessionController extends AbstractController
      * @Route("/session/formation/{idSession}/remove/{idStagiaire}", name="removeStagiaire")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
      * @ParamConverter("stagiaire", options={"mapping": {"idStagiaire": "id"}})
+     * @IsGranted("ROLE_ADMIN")
      */
     //paramConverter : https://symfony.com/bundles/SensioFrameworkExtraBundle/current/annotations/converters.html
     //mapping: Configures the properties and values to use with the findOneBy() method: the key is the route placeholder name and the value is the Doctrine property name
@@ -128,6 +133,7 @@ class SessionController extends AbstractController
      * @Route("/session/formation/{idSession}/addProgramme/{idModule}", name="addProgramme")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
      * @ParamConverter("module", options={"mapping": {"idModule": "id"}})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function addProgramme(ManagerRegistry $doctrine, Request $request, SessionFormation $session, Module $module)
     {
@@ -157,6 +163,7 @@ class SessionController extends AbstractController
      * @Route("/session/formation/{idSession}/removeProgramme/{idProgramme}", name="removeProgramme")
      * @ParamConverter("session", options={"mapping" : {"idSession": "id"}})
      * @ParamConverter("programmer", options={"mapping": {"idProgramme": "id"}})
+     * @IsGranted("ROLE_ADMIN")
      */
     // ATTENTION, la route ne doit pas être identique a celle d'un autre !!! "/removeProgramme" a éte mis a la place de "remove"
     // on appelle la variable $programmer dans le @paramConverter !!
