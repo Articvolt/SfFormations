@@ -97,7 +97,7 @@ article {
     justify-content: space-between;
 }
 
-/* TABLE */
+/*------------------------------- TABLE --------------------------------------*/
 
 table {
     border-collapse: collapse;
@@ -174,17 +174,53 @@ p .addButton a:hover {
     text-align: center;
 }
 
-/* -------------------- FORMULAIRE ------------------------ */
+/* -------------------------------- FORMULAIRE ------------------------------------- */
 
-.form {
-    margin: 20px;
+.inputAside {
+    display: flex;
+    justify-content: center;
 }
 
-.form-button {
-    color: #EA3546;
+.inputLine {
+    margin: 5px 12px;
+    text-align: center;  
 }
 
-/* -------------------- AFFICHAGE SESSION SHOW ------------------------ */
+.inputLine .label {
+    text-align: center;
+    
+}
+
+/* .form-input {
+    margin: 1rem;
+    padding: 10px;
+    font-size: 16px;
+    justify-content: center;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-input label {
+    text-decoration: underline;
+}
+
+.form-submit {
+    border: none;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #D5C7BC;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.form-submit:hover {
+    transform: translateY(-4px);
+    scale: 1.1;
+    transition: 0.4s;
+} */
+
+/* ------------------------------ AFFICHAGE SESSION SHOW ------------------------------ */
 
 .showSessionArticle {
     display: flex;

@@ -16,6 +16,15 @@
     {% endif %}
     
 
-    {{ form(formAddCategorie) }}
+    {# {{ form(formAddCategorie) }} #}
 
+    {{ form_start(formAddCategorie) }}
+    <div>   
+        <p class="inputLine">{{ form_label(formAddCategorie.nomCategorie) }}</p>
+        <p class="inputLine">{{ form_widget(formAddCategorie.nomCategorie) }}</p>
+    </div>
+    <div>
+        <p class="inputLine">{{ form_widget(formAddCategorie.submit) }}</p>
+    </div>
+    {{ form_end(formAddCategorie) }}
 {% endblock %}

@@ -15,6 +15,31 @@
         <h1>Ajout d'un formateur</h1>
     {% endif %}
 
-    {{ form(formAddFormateur) }}
+    
+    {{ form_start(formAddFormateur) }}
+    <div class="inputAside">
+        <div>   
+            <p class="inputLine">{{ form_label(formAddFormateur.nom) }}</p>
+            <p class="inputLine">{{ form_widget(formAddFormateur.nom) }}</p>
+        </div>
+        <div>
+            <p class="inputLine">{{ form_label(formAddFormateur.prenom) }} </p>
+            <p class="inputLine">{{ form_widget(formAddFormateur.prenom) }}</p>   
+        </div>
 
+    </div>
+    <div class="inputAside">
+        <div>   
+            <p class="inputLine"> {{ form_label(formAddFormateur.phone) }}</p>
+            <p class="inputLine"> {{ form_widget(formAddFormateur.phone) }}</p>
+        </div>
+        <div>
+            <p class="inputLine">{{ form_label(formAddFormateur.email) }}</p>
+            <p class="inputLine">{{ form_widget(formAddFormateur.email) }}</p>
+        </div>
+    </div>
+    <div>
+        <p class="inputLine">{{ form_widget(formAddFormateur.submit) }}</p>
+    </div>
+    {{ form_end(formAddFormateur) }}
 {% endblock %}

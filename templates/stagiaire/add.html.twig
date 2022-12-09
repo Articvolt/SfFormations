@@ -15,7 +15,45 @@
         <h1>Ajout d'un stagiaire</h1>
     {% endif %}
     
+    {{ form_start(formAddStagiaire) }}
+    <div class="inputAside">
+        <div>   
+            <p class="inputLine">{{ form_label(formAddStagiaire.prenom) }}</p>
+            <p class="inputLine">{{ form_widget(formAddStagiaire.prenom) }}</p>
+        </div>
+        <div>
+            <p class="inputLine">{{ form_label(formAddStagiaire.nom) }} </p>
+            <p class="inputLine">{{ form_widget(formAddStagiaire.nom) }} </p>
+        </div>
 
-    {{ form(formAddStagiaire) }}
+    </div>
+    <div class="inputAside">
+        <div>   
+            <p class="inputLine"> {{ form_label(formAddStagiaire.phone) }}</p>
+            <p class="inputLine"> {{ form_widget(formAddStagiaire.phone) }}</p>
+        </div>
+        <div>
+            <p class="inputLine">{{ form_label(formAddStagiaire.email) }}</p>
+            <p class="inputLine">{{ form_widget(formAddStagiaire.email) }}</p>
+        </div>
+    </div>
+    <div class="inputAside">
+        <div>
+            <p class="inputLine">{{ form_label(formAddStagiaire.adresse) }}</p>
+            <p class="inputLine">{{ form_widget(formAddStagiaire.adresse) }}</p>
+        </div>
+        <div>
+            <p class="inputLine">{{ form_label(formAddStagiaire.cp) }}</p>
+            <p class="inputLine">{{ form_widget(formAddStagiaire.cp) }}</p>
+        </div>
+        <div>
+            <p class="inputLine">{{ form_label(formAddStagiaire.city) }}</p>
+            <p class="inputLine">{{ form_widget(formAddStagiaire.city) }}</p>
+        </div>
+    </div>
+    <div>
+        <p class="inputLine">{{ form_widget(formAddStagiaire.submit) }}</p>
+    </div>
+    {{ form_end(formAddStagiaire) }}
 
 {% endblock %}
