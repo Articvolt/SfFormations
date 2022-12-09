@@ -17,44 +17,46 @@
 
     {# barre de connexion #}
         {% if app.user %}
-        <div class="connect">
-            <ul>
-                <li>
-                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_profil') }}">Mon profil <i class="fa-solid fa-user"></i></a>
-                </li>
-            </ul>
-        </div>
-        
-         
-        
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Deconnexion</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_profil') }}">Mon profil <i class="fa-solid fa-user"></i></a>
+                    </li>
+                </ul>
+            </nav>
+            
+    {# barre de navigation #}
+            <nav class="navbar">
+                <ul>
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li><a href="{{ path('app_categorie') }}">Categories</a></li>
+                    <li><a href="{{ path('app_formateur') }}">Formateurs</a></li>
+                    <li><a href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
+                    <li><a href="{{ path('app_session') }}">Sessions</a></li>
+                </ul>
+            </nav>
+            
         {% else %}
-        <div class="connect">
-            <ul>
-                <li>
-                    <a href="{{ path('app_login') }}">Se connecter</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_register') }}">S'inscrire</a>
-                </li>
-            </ul>
-        </div>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ path('app_login') }}"><i class="fa-solid fa-right-to-bracket"></i> Connexion</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_register') }}">S'inscrire</a>
+                    </li>
+                </ul>
+            
+            </nav>
          
         
         {% endif %}
 
-        {# barre de navigation #}
-        <nav class="navbar">
-            <ul>
-                <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                <li><a href="{{ path('app_categorie') }}">Categories</a></li>
-                <li><a href="{{ path('app_formateur') }}">Formateurs</a></li>
-                <li><a href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
-                <li><a href="{{ path('app_session') }}">Sessions</a></li>
-            </ul>
-        </nav>
+        
 
         {% block body %}
         {% endblock %}
