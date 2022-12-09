@@ -16,6 +16,33 @@
     {% endif %}
 
 
-    {{ form(formAddSession) }}
+{{ form_start(formAddSession) }}
 
+    <div>   
+        <p class="inputLine">{{ form_label(formAddSession.intitule) }}</p>
+        <p class="inputLine">{{ form_widget(formAddSession.intitule) }}</p>
+    </div>
+    </div>
+    <div class="inputAside">
+        <div>   
+            <p class="inputLine"> {{ form_label(formAddSession.dateDebut) }}</p>
+            <p class="inputLine"> {{ form_widget(formAddSession.dateDebut) }}</p>
+        </div>
+        <div>
+            <p class="inputLine">{{ form_label(formAddSession.dateFin) }}</p>
+            <p class="inputLine">{{ form_widget(formAddSession.dateFin) }}</p>
+        </div>
+    </div>
+    <div>   
+        <p class="inputLine">{{ form_label(formAddSession.placeTotal) }}</p>
+        <p class="inputLine">{{ form_widget(formAddSession.placeTotal) }}</p>
+    </div>
+    <div>   
+        <p class="inputLine">{{ form_label(formAddSession.formateur) }}</p>
+        <p class="inputLine">{{ form_widget(formAddSession.formateur) }}</p>
+    </div>
+    <div>
+        <p class="inputLine">{{ form_widget(formAddSession.submit) }}</p>
+    </div>
+{{ form_end(formAddSession) }}
 {% endblock %}

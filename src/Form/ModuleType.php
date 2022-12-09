@@ -20,6 +20,7 @@ class ModuleType extends AbstractType
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'nomCategorie',
+                'auto_initialize' => true,
                 'label' => 'Categorie'
                 // 'expanded' => true,
                 // 'multiple' => false
