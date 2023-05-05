@@ -36,26 +36,29 @@ class ModuleController extends AbstractController
      */
 public function add(ManagerRegistry $doctrine, Module $module = null, Request $request): Response 
     {
-
+        // condition IF si il n'y a pas de module, alors création d'une nouvelle instance de la classe module
         if(!$module) {
             $module = new module();
         }
 
-
+        // création du formulaire
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
         
+        // condition IF si le formulaire est valide et soumis
         if($form->isSubmitted() && $form->isValid()) {
             
+            // récuperation des données du formulaire dans la variable module
             $module = $form->getData();
             $entityManager = $doctrine->getManager();
-            //prepare
+            //prepare la requête DQL
             $entityManager->persist($module);
-            //execute
+            //execute la requête DQL vers la base de données
             $entityManager->flush();
             // récupère l'id de la catégorie du module visé
             $idCat = $module->getCategorie()->getId();
             
+            // retourne une route avec des paramètres
             return $this->redirectToRoute('show_categorie', ["id" => $idCat]);
         }
         
